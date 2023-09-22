@@ -1,16 +1,11 @@
 import React from 'react';
+import { Input, Label } from './Filter.styled';
 
 export const Filter = ({ value, onChange }) => {
   return (
-    <label htmlFor="">
+    <Label htmlFor="">
       Find contacts by name
-      <input
-        onChange={onChange}
-        type="text"
-        name="filter"
-        value={value}
-        // onChange={this.handleChange}
-      />
-    </label>
+      <Input onChange={onChange} type="text" name="filter" value={value} />
+    </Label>
   );
 };

@@ -1,7 +1,9 @@
 import { Component, React } from 'react';
+import { Container, Text } from './App.styled';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -15,6 +17,7 @@ export class App extends Component {
   };
 
   formSubmitHandle = data => {
+    const contact = { id: nanoid(), ...data };
     // console.log(data);
 
     if (this.state.contacts.some(contact => contact.name === data.name)) {
@@ -22,7 +25,7 @@ export class App extends Component {
       return;
     }
     this.setState(prevState => ({
-      contacts: [data, ...prevState.contacts],
+      contacts: [contact, ...prevState.contacts],
     }));
   };
 
@@ -52,18 +55,18 @@ export class App extends Component {
   render() {
     const visibleContacts = this.getVisibleContacts();
     return (
-      <div>
-        <ContactForm onSubmitClick={this.formSubmitHandle} />
+      <Container>
+        <ContactForm onSubmit={this.formSubmitHandle} />
         <h2>Contacts</h2>
 
-        <p>Total contacts: {this.state.contacts.length}</p>
+        <Text>Total contacts: {this.state.contacts.length}</Text>
 
         <Filter value={this.state.filter} onChange={this.changeFilter} />
         <ContactList
           options={visibleContacts}
           deleteContact={this.handleDeleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }

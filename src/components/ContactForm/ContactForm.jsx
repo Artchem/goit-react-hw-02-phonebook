@@ -1,8 +1,11 @@
-import { Component } from 'react';
-import { nanoid } from 'nanoid';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { object, string, number, date, InferType } from 'yup';
-import { Btn, LabelForm } from 'components/ContactForm/ContactForm.styled';
+import { Formik, ErrorMessage } from 'formik';
+import { object, string } from 'yup';
+import {
+  Btn,
+  Label,
+  Input,
+  FormStyled,
+} from 'components/ContactForm/ContactForm.styled';
 
 const initialValues = { name: '', number: '' };
 
@@ -41,99 +44,20 @@ export const ContactForm = ({ onSubmit }) => {
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <Form>
+      <FormStyled>
         <h2>Phonebook</h2>
-        <LabelForm htmlFor="">
+        <Label htmlFor="">
           Name
-          <Field
-            type="text"
-            name="name"
-            // value={this.state.name}
-            // onChange={this.handleChange}
-            // pattern="^[A-Za-zА-Яа-я]{1}[A-Za-zА-Яа-я-\'\s]*[A-Za-zА-Яа-я]{1}$"
-            // title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            // required
-          />
+          <Input type="text" name="name" />
           <ErrorMessage name="name" component="div" />
-        </LabelForm>
-        <LabelForm htmlFor="">
+        </Label>
+        <Label htmlFor="">
           Number
-          <Field
-            type="tel"
-            name="number"
-            // value={this.state.number}
-            // onChange={this.handleChange}
-            // pattern="\\+?\\d{1,4}?[ .\\-\\s]?\\(?\\d{1,3}?\\)?[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,9}"
-            // title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            // required
-          />
+          <Input type="tel" name="number" />
           <ErrorMessage name="number" component="div" />
-        </LabelForm>
+        </Label>
         <Btn type="submit">Add contact</Btn>
-      </Form>
+      </FormStyled>
     </Formik>
   );
 };
-
-// export class ContactForm extends Component {
-//   state = {
-//     name: '',
-//     number: '',
-//   };
-
-//   // contactId = nanoid();
-
-//   handleChange = evt => {
-//     // console.log(evt.target.name);
-//     const { name, value } = evt.currentTarget;
-//     this.setState({ [name]: value });
-//   };
-
-//   handleSubmit = evt => {
-//     evt.preventDefault();
-//     // console.log(this.state);
-//     this.props.onSubmitClick({ ...this.state, id: nanoid(7) });
-//     this.resetForm();
-//   };
-
-//   resetForm = () => {
-//     this.setState({ name: '', number: '' });
-//   };
-
-//   render() {
-//     // console.log(this.contactId);
-
-// return (
-//   <Formik>
-//     <Form onSubmit={this.handleSubmit}>
-//       <h2>Phonebook</h2>
-//       <LabelForm htmlFor="">
-//         Name
-//         <InputForm
-//           type="text"
-//           name="name"
-//           value={this.state.name}
-//           onChange={this.handleChange}
-//           pattern="^[A-Za-zА-Яа-я]{1}[A-Za-zА-Яа-я-\'\s]*[A-Za-zА-Яа-я]{1}$"
-//           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-//           required
-//         />
-//       </LabelForm>
-//       <LabelForm htmlFor="">
-//         Number
-//         <InputForm
-//           type="tel"
-//           name="number"
-//           value={this.state.number}
-//           onChange={this.handleChange}
-//           pattern="\\+?\\d{1,4}?[ .\\-\\s]?\\(?\\d{1,3}?\\)?[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,9}"
-//           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-//           required
-//         />
-//       </LabelForm>
-//       <Btn type="submit">Add contact</Btn>
-//     </Form>
-//   </Formik>
-// );
-//   }
-// }
